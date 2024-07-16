@@ -1,0 +1,19 @@
+<template>
+    <div>
+        <div>
+            Container azul
+            <div>
+                Logo
+                Título
+                Subtítulo
+            </div>
+        </div>
+        <div>
+            <form>
+                <input
+                    :value="text"
+                />
+            </form>
+        </div>
+    </div>
+</template>
