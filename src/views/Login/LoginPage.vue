@@ -14,8 +14,15 @@
         </div>
         <div class="form-container">
             <form>
-                <emailInput class="email-input" />
-                <PasswordInput class="password-input"/>
+                <p>Entre com seus dados de acesso</p>
+                <div class="email-block">
+                    <legend>Nome de usuário ou e-mail:</legend>
+                    <emailInput class="email-input" />
+                </div>
+                <div class="password-block">
+                    <legend>Senha:</legend>
+                    <PasswordInput class="password-input"/>
+                </div>
                 <LoginButton class="login-button"/>
                 <a>Esqueci minha senha</a>
             </form>

@@ -1,5 +1,5 @@
 <template>
-    <button>
+    <button class="login-button">
         Entrar
     </button>
 </template>
@@ -9,3 +9,7 @@ export default {
     name: 'LoginButton'
 }
 </script>
+
+<style lang="stylus">
+    @import './login-button.styl';
+</style>

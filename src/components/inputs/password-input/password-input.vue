@@ -1,6 +1,7 @@
 <template>
     <input
-        type="text"
+        type="password"
+        class="password-input"
     />
 </template>
 
@@ -9,3 +10,7 @@ export default {
     name: 'PasswordInput'
 }
 </script>
+
+<style lang="stylus">
+    @import './password-input.styl';
+</style>

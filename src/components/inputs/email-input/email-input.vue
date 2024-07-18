@@ -1,6 +1,7 @@
 <template>
     <input
-        type="text"
+        type="email"
+        class="email-input"
     />
 </template>
 
@@ -9,3 +10,7 @@ export default {
     name: 'EmailInput'
 }
 </script>
+
+<style lang="stylus">
+    @import './email-input.styl';
+</style>
