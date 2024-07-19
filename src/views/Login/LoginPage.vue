@@ -23,7 +23,9 @@
                     <legend>Senha:</legend>
                     <PasswordInput class="password-input"/>
                 </div>
-                <LoginButton class="login-button"/>
+                <div>
+                    <LoginButton class="login-button"/>
+                </div>
                 <a>Esqueci minha senha</a>
             </form>
         </div>
