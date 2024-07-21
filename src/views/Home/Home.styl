@@ -4,7 +4,64 @@
     align-items center
     height 100vh
     width 100vw
+    background-color #E9F4FB
 
-.SideBarMain
+.side-bar-main
+    position absolute
+    left 0%
+
+.categories-bar-main
+    position absolute
+    left 106px
+
+.header-main
+    width 100%
+    position: absolute
+    left:  0%
+    top 0%
+
+.tasks-container
+    // background-color: #c68a8a
+    width 50%
+    height 70%
     position relative
-    right 47%
+    top 10%
+    left 11%
+    display flex
+    flex-direction column
+    gap 3px
+    p1,p2
+        margin 0
+    p1
+        font-family Gilroy_Bold
+        font-size 26px
+        color #283848
+    p2
+        font-family Gilroy_SemiBold
+        font-size 17px
+        color #77899E
+        .name
+            color #2693FF
+        .tasks,.taskLabel
+            color #2693FF
+            text-decoration underline
+    .search-bar-home
+        position absolute
+        top 20%
+.add-task-button
+    position absolute
+    bottom 7%
+    right 5%
+    max-width 77px
+    max-height: 77px
+    width 100%
+    height 100%
+    border none
+    border-radius 50%
+    background-color #0ED984
+    color #FFF
+    font-size 45px
+    font-weight bold
+.add-task-button:hover
+    cursor pointer
+    background-color #1AD182

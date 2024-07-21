@@ -1,0 +1,71 @@
+.CategoriesBlock
+    background-color: #F4FBFF
+    width 17vw
+    max-width: 227px
+    height: 100%
+    display flex
+    flex-direction column
+    font-family Gilroy_Bold
+    align-items left
+    justify-content center
+    box-shadow 0px 4px 6px rgba(0, 0, 0, 0.1)  
+
+    p
+        font-size 17px
+        color #4E5F70
+        margin-left 18%
+
+    nav
+        width 100%
+        ul
+            list-style-type none
+            padding 0
+            margin 0
+            width 100%
+            li
+                position relative
+                padding-left 12.2px
+                margin-bottom 10px
+                margin-left 18%
+                button
+                    background none
+                    border none
+                    font-size 15px
+                    color #283848
+                    text-align left
+                    width 100%
+                    padding 15px 0
+                    display inline-flex
+                    align-items center
+                    &:hover
+                        cursor pointer
+                        color #2693FF
+                        
+                    &:before
+                        content '>'
+                        position absolute
+                        left 0
+                        top 30%
+                        color #283848
+                        font-size 16px
+                    &:hover,
+                    &:hover::before
+                        color #2693FF
+
+                .urgent,
+                .important
+                    width 20px
+                    height 20px
+                    display flex
+                    align-items center
+                    justify-content center
+                    border-radius 50%
+                    font-size 11px
+                    color #FFF
+                    margin-left 10px
+                .urgent
+                    background-color #FF2E79
+                    
+                .important
+                    background-color #FFC42E
+                    
