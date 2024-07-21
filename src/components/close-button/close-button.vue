@@ -1,16 +1,15 @@
 <template>
     <div>
-        <legend>Título:</legend>
-        <input/>
+        <button>x</button>
     </div>
 </template>
 
 <script>
     export default {
-        name: 'TaskTitle'
+        name: 'CloseButton'
     }
 </script>
 
 <styles lang="stylus">
-    @import './task-title.styl'
+    @import './close-button.styl'
 </styles>
