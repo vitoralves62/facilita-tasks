@@ -1,0 +1,35 @@
+.categories-container
+  display flex
+  flex-direction row
+  gap 20px
+  font-family Gilroy_SemiBold
+  color #4E657B
+
+.urgent-container, .important-container
+  display flex
+  flex-direction row
+  align-items center
+  gap 10px
+
+.urgent-check, .important-check
+  appearance none
+  border 2px solid #BFDAEB
+  border-radius 50%
+  width 20px
+  height 20px
+  display inline-block
+  position relative
+  &:checked::before
+    content ''
+    display block
+    border-radius 50%
+    width 12px
+    height 12px
+    background-color #1E90FF // Blue color for the selected state
+    position absolute
+    top 50%
+    left 50%
+    transform translate(-50%, -50%)
+
+label
+  cursor pointer

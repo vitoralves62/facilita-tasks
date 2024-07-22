@@ -1,13 +1,27 @@
 <template>
-    <div>
-        <legend>Título:</legend>
-        <input/>
+    <div class="title-container">
+        <legend class="tittle-legend">Título:</legend>
+        <input
+            class="task-title-main" id="title"
+            v-model="localTitle" @input="updateTitle"
+        />
     </div>
 </template>
 
 <script>
     export default {
-        name: 'TaskTitle'
+        name: 'TaskTitle',
+        props: ['value'],
+        data() {
+            return {
+            localTitle: this.value
+            }
+        },
+        methods: {
+            updateTitle() {
+            this.$emit('input', this.localTitle);
+            }
+        }
     }
 </script>
 

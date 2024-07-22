@@ -1,13 +1,26 @@
 <template>
     <div class="modal-overlay" v-if="isVisible">
         <div class="modal-content">
-            <div>
-                <p>Cadastrar Tarefa</p> 
-                <CloseButton @click="closeModal"/>  
+            <div class="modal-header">
+                <p class="modal-title">Cadastrar Tarefa</p> 
+                <CloseButton @close="closeModal" class="close-modal-button"/>  
             </div>
-            <div>
-                <TaskTitle/>
-                <TaskDescription/>
+            <div class="form-container">
+                <form class="create-task-form"  @submit.prevent="addTask">
+                    <TaskTitle
+                        v-model="task.title"
+                        class="task-title"
+                    />
+                    <TaskDescription
+                        v-model="task.description"
+                        class="task-desc"
+                    />
+                    <TaskCategories
+                        v-model="task.categorie"
+                        class="task-categorie"
+                    />
+                    <button :class="['add-button', { enabled: isFormValid }]" :disabled="!isFormValid">Adicionar</button>
+                </form>
             </div>
         </div>
     </div>
@@ -17,13 +30,15 @@
     import TaskTitle from '@/components/task-title/task-title.vue';
     import TaskDescription from '@/components/task-desc/task-desc.vue';
     import CloseButton from '@/components/close-button/close-button.vue';
+    import TaskCategories from '@/components/task-categorie/task-categorie-checks.vue'
 
     export default {
         name: 'CreateTaskModal',
         components: {
             TaskTitle,
             TaskDescription,
-            CloseButton
+            CloseButton,
+            TaskCategories
         },
         props:{
             isVisible: {
@@ -34,14 +49,29 @@
         data(){
             return{
                 task: {
-
+                    title: '',
+                    description: '',
+                    categorie: ''
                 }
+            }
+        },
+        computed: {
+            isFormValid(){
+                const isValid = this.task.title.trim() !== '' && this.task.description.trim() !== '';
+                return isValid;
             }
         },
         methods: {
             closeModal() {
             this.$emit('close');
             },
+            addTask() {
+                console.log('Adding Task:', this.task);
+                if (this.isFormValid) {
+                    this.$emit('add-task', this.task);
+                    this.closeModal();
+                }
+            }
         }
     }
 </script>

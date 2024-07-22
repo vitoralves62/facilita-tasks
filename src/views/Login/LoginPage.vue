@@ -9,12 +9,12 @@
                     <span class="title-bold">FACILITA</span>
                     <span class="title-regular">TASKS</span>
                 </h1>
-                <p>Gestão de tarefas pessoais</p>
+                <p class="sub-title">Gestão de tarefas pessoais</p>
             </div>
         </div>
         <div class="form-container">
-            <form>
-                <p>Entre com seus dados de acesso</p>
+            <form class="form-block">
+                <p class="login-tittle">Entre com seus dados de acesso</p>
                 <div class="email-block">
                     <legend>Nome de usuário ou e-mail:</legend>
                     <emailInput class="email-input" />
@@ -26,7 +26,7 @@
                 <div>
                     <LoginButton class="login-button"/>
                 </div>
-                <a>Esqueci minha senha</a>
+                <a class="forgot-pass">Esqueci minha senha</a>
             </form>
         </div>
     </div>

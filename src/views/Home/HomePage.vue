@@ -11,12 +11,12 @@
             class="side-bar-main"
         />
         <div class="tasks-container">
-            <p1>Minhas Tarefas</p1>
-            <p2>
+            <p class="tasks-container-title">Minhas Tarefas</p>
+            <p class="tasks-container-subtitle">
                 Olá <span class="name">{{ name }}</span>, você tem <span class="tasks"> {{ tasksCount }} </span><span class="taskLabel">{{ taskLabel }}</span> <span>{{ pendenceLabel }}</span>
-            </p2>
+            </p>
             <SearchBar class="search-bar-home"/>
-            
+            <TaskLabel class="task-label-home"/>
         </div>
         <button @click="openModal" class="add-task-button">+</button>
         <CreateTaskModal
@@ -32,6 +32,7 @@
     import HeaderMain from '@/components/header/header-main.vue';
     import SearchBar from '@/components/search-bar/search-bar.vue';
     import CreateTaskModal from '@/components/modals/create-task-modal/create-task-modal.vue';
+    import TaskLabel from '@/components/task-label/task-label.vue';
 
     export default {
         name: "HomePage",
@@ -40,12 +41,13 @@
             CategorieBar,
             HeaderMain,
             SearchBar,
-            CreateTaskModal
+            CreateTaskModal,
+            TaskLabel
         },
         data () {
             return{
                 name:'Vitor Alves',
-                tasksCount: 5,
+                tasksCount: 1,
                 isModalVisible: false
             }
         },

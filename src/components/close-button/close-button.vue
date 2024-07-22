@@ -1,6 +1,10 @@
 <template>
     <div>
-        <button>x</button>
+        <button @click="$emit('close')" class="close-button">
+            <img
+                src="@/assets/imgs/closeButton.svg"
+            />
+        </button>
     </div>
 </template>
 

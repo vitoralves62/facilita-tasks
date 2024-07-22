@@ -1,19 +1,69 @@
 .modal-overlay
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    position fixed
+    top 0
+    left 0
+    right 0
+    bottom 0
+    background rgba(0, 0, 0, 0.5);
+    display flex
+    justify-content center
+    align-items center
     .modal-content
         background #FFF
         width 40%
         height 70%
         max-width 660px
         max-height 488px
-        padding 2%
         border-radius 8px
         display flex
+        flex-direction column
+        .modal-header
+            display flex
+            flex-direction row
+            align-items: center
+            position relative
+            margin-top 0px
+            .modal-title
+                font-family Gilroy_Bold
+                font-size 25px
+                color #283848
+                margin-left 5%
+                margin-top 5%
+            .close-modal-button
+                position absolute
+                margin-top -5%
+                right 3%    
+        .form-container
+            width 90%
+            margin 0
+            padding 5%
+            display: flex
+            position relative
+            top -5%
+            .create-task-form
+                width 100%
+                .task-title
+                    position relative
+                .task-desc
+                    position relative
+                    top 5%
+                .task-categorie
+                    position relative
+                    top 10%
+            .add-button
+                //background-color #A6C1D2
+                border none
+                font-family Gilroy_Bold
+                border-radius 4px
+                width 118px
+                height 47px
+                color #FFF
+                position relative
+                left 76%
+                top 3%
+                cursor not-allowed
+            .add-button.enabled
+                background-color #16D08D
+                cursor pointer
+            .add-button:disabled
+                background-color #A6C1D2
