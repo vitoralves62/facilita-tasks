@@ -66,7 +66,6 @@
             this.$emit('close');
             },
             addTask() {
-                console.log('Adding Task:', this.task);
                 if (this.isFormValid) {
                     this.$emit('add-task', this.task);
                     this.closeModal();
