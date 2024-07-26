@@ -7,7 +7,7 @@
           name="task-category"
           class="urgent-check"
           v-model="localCategory"
-          value="urgent"
+          value="Urgente"
         />
         <label for="urgent" class="urgent-text">Urgente</label>
       </div>
@@ -18,7 +18,7 @@
           name="task-category"
           class="important-check"
           v-model="localCategory"
-          value="important"
+          value="Importante"
         />
         <label for="important" class="important-text">Importante</label>
       </div>

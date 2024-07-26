@@ -13,10 +13,12 @@
         <div class="tasks-container">
             <p class="tasks-container-title">Minhas Tarefas</p>
             <p class="tasks-container-subtitle">
-                Olá <span class="name">{{ name }}</span>, você tem <span class="tasks"> {{ tasksCount }} </span><span class="taskLabel">{{ taskLabel }}</span> <span>{{ pendenceLabel }}</span>
+                Olá <span class="name">{{ name }}</span>, você tem <span class="tasks"> {{ totalTasks }} </span><span class="taskLabel">{{ taskLabel }}</span> <span>{{ pendenceLabel }}</span>
             </p>
             <SearchBar class="search-bar-home"/>
-            <TaskLabel class="task-label-home"/>
+            <div v-for="task in tasks" :key="task.id" class="task-label-home">
+                <TaskLabel :task="task"/>
+            </div>
         </div>
         <button @click="openModal" class="add-task-button">+</button>
         <CreateTaskModal
@@ -33,6 +35,8 @@
     import SearchBar from '@/components/search-bar/search-bar.vue';
     import CreateTaskModal from '@/components/modals/create-task-modal/create-task-modal.vue';
     import TaskLabel from '@/components/task-label/task-label.vue';
+    import { useTaskStore } from '@/stores/taskStore';
+    import { computed, onMounted } from 'vue';
 
     export default {
         name: "HomePage",
@@ -44,19 +48,37 @@
             CreateTaskModal,
             TaskLabel
         },
+        setup(){
+            const taskStore = useTaskStore();
+            onMounted(() => {
+                taskStore.loadTasks();
+            });
+            const tasks = computed(() => taskStore.tasks);
+            const totalTasks = computed(() => taskStore.totalTasks);
+            const urgentTasks = computed(() => taskStore.urgentTasks);
+            const importantTasks = computed(() => taskStore.importantTasks);
+            const tasksCount = computed(() => taskStore.tasks.length);
+
+            return {
+                tasks,
+                tasksCount,
+                totalTasks,
+                urgentTasks,
+                importantTasks
+            };
+        },
         data () {
             return{
                 name:'Vitor Alves',
-                tasksCount: 1,
                 isModalVisible: false
             }
         },
         computed: {
             taskLabel() {
-                return this.tasksCount === 1 ? 'tarefa' : 'tarefas';
+            return this.tasksCount === 1 ? 'tarefa' : 'tarefas';
             },
             pendenceLabel() {
-                return this.tasksCount === 1 ? 'pendente.' : 'pendentes.'
+                return this.tasksCount === 1 ? 'pendente.' : 'pendentes.';
             }
         },
         methods: {

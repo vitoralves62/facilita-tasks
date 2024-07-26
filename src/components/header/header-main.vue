@@ -6,8 +6,8 @@
                 class="profile-pic"
             />
             <div class="profile-infos">
-                <a class="name"> Vitor Alves</a><br>
-                <a class="role"> Front-end Developer</a>
+                <a class="name"> {{ userName }}</a><br>
+                <a class="role"> {{ userRole }}</a>
             </div>
         </div>
     </div>
@@ -15,7 +15,13 @@
 
 <script>
     export default {
-        name: 'HeaderMain'
+        name: 'HeaderMain',
+        data() {
+            return {
+                userName: 'Vitor Alves',
+                userRole: 'Front-end Developer'
+            }
+        }
     }
 </script>
 

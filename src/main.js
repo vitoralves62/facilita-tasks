@@ -3,7 +3,7 @@ import App from './App.vue'
 import router from './router'
 import 'normalize.css'
 import { FontAwesomeIcon } from './fontAwesome'
-import { PiniaVuePlugin,createPinia } from 'pinia'
+import { PiniaVuePlugin, createPinia } from 'pinia'
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.config.productionTip = false

@@ -13,13 +13,13 @@
                 <li>
                     <button>
                         Urgentes
-                        <span class="urgent">2</span>
+                        <span class="urgent">{{ urgentTasks }}</span>
                     </button>
                 </li>
                 <li>
                     <button>
                         Importantes
-                        <span class="important">3</span>
+                        <span class="important">{{ importantTasks }}</span>
                     </button>
                 </li>
                 <li>
@@ -38,11 +38,23 @@
 </template>
 
 <script>
+    import { useTaskStore } from '@/stores/taskStore';
+    import { computed, onMounted } from 'vue';
     export default {
         name: 'CategoriesBar',
-        components: {
+        setup(){
+            const taskStore = useTaskStore();
+            onMounted(() => {
+                taskStore.loadTasks();
+            });
+            const urgentTasks = computed(() => taskStore.urgentTasks);
+            const importantTasks = computed(() => taskStore.importantTasks);
 
-        },
+            return {
+                urgentTasks,
+                importantTasks
+            };
+        }
     }
 </script>
 

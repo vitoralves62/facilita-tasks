@@ -6,7 +6,7 @@
                 <CloseButton @close="closeModal" class="close-modal-button"/>  
             </div>
             <div class="form-container">
-                <form class="create-task-form"  @submit.prevent="addTask">
+                <form class="create-task-form"  @submit.prevent="handleSubmit">
                     <TaskTitle
                         v-model="task.title"
                         class="task-title"
@@ -30,7 +30,8 @@
     import TaskTitle from '@/components/task-title/task-title.vue';
     import TaskDescription from '@/components/task-desc/task-desc.vue';
     import CloseButton from '@/components/close-button/close-button.vue';
-    import TaskCategories from '@/components/task-categorie/task-categorie-checks.vue'
+    import TaskCategories from '@/components/task-categorie/task-categorie-checks.vue';
+    import { useTaskStore } from '@/stores/taskStore';
 
     export default {
         name: 'CreateTaskModal',
@@ -65,11 +66,18 @@
             closeModal() {
             this.$emit('close');
             },
-            addTask() {
+            handleSubmit() {
                 if (this.isFormValid) {
-                    this.$emit('add-task', this.task);
+                    const taskStore = useTaskStore();
+                    taskStore.addTask({ ...this.task });
+                    this.resetForm();
                     this.closeModal();
                 }
+            },
+            resetForm(){
+                this.task.title = '';
+                this.task.description = '';
+                this.task.categorie = '';
             }
         }
     }
