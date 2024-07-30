@@ -8,9 +8,17 @@ export const useTaskStore = defineStore('taskStore', {
     actions: {
         addTask(task) {
             task.id = this.nextId;
-            this.nextId += 1; // Incrementa o próximo ID
+            task.completed = false;
+            this.nextId += 1;
             this.tasks.push(task);
             this.saveTasks();
+        },
+        updateTask(updatedTask) {
+            const index = this.tasks.findIndex(task => task.id === updatedTask.id);
+            if (index !== -1) {
+                this.tasks.splice(index, 1, updatedTask);
+                this.saveTasks();
+            }
         },
         saveTasks() {
             localStorage.setItem('tasks', JSON.stringify(this.tasks));
@@ -22,10 +30,23 @@ export const useTaskStore = defineStore('taskStore', {
             const maxId = tasks.reduce((max, task) => task.id > max ? task.id : max, 0);
             this.nextId = maxId + 1;
         },
+        deleteTask(taskId) {
+            this.tasks = this.tasks.filter(task => task.id !== taskId);
+            this.saveTasks();
+        },
+        toggleTaskCompletion(taskId) {
+            const task = this.tasks.find(task => task.id === taskId);
+            if (task) {
+                task.completed = !task.completed;
+                this.saveTasks();
+            }
+        }
     },
     getters: {
         totalTasks: (state) => state.tasks.length,
         urgentTasks: (state) => state.tasks.filter(task => task.categorie.toLowerCase() === 'urgente').length,
         importantTasks: (state) => state.tasks.filter(task => task.categorie.toLowerCase() === 'importante').length,
+        normalTasks: (state) => state.tasks.filter(task => !['urgente', 'importante'].includes(task.categorie.toLowerCase()) && !task.completed).length,
+        completedTasks: (state) => state.tasks.filter(task => task.completed).length,
     }
 });

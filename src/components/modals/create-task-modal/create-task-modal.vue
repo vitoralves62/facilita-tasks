@@ -1,6 +1,6 @@
 <template>
     <div class="modal-overlay" v-if="isVisible">
-        <div class="modal-content">
+        <div class="modal-create-content">
             <div class="modal-header">
                 <p class="modal-title">Cadastrar Tarefa</p> 
                 <CloseButton @close="closeModal" class="close-modal-button"/>  

@@ -5,31 +5,31 @@
         </div>
         <ul class="sidebar-itens">
             <li class="dashboard">
-                <button class="dash-button">
+                <router-link to="/Dashboard" class="dash-button">
                     <img
                         src='@/assets/imgs/chart-bar-light1.svg'
                         class="graph"
                     />
-                    Dashboard
-                </button>
+                    <a class="a-dash" href="/Dashboard">Dashboard</a>
+                </router-link>
             </li>
             <li class="tasks">
-                <button class="tasks-button">
+                <router-link to="/Tarefas" class="tasks-button">
                     <img
                         src="@/assets/imgs/check-circle.svg"
                         class="check-circle"
                     />
-                    Tarefas
-                </button>
+                    <a class="a-tasks" href="/Tarefas">Tarefas</a>
+                </router-link>
             </li>
             <li class="settings">
-                <button class="config-button">
+                <router-link to="/Configuracoes" class="config-button">
                     <img
                         src="@/assets/imgs/triple-gear.svg"
                         class="gears"
                     />
-                    Configurações
-                </button>
+                    <a class="a-settings" href="/Configuracoes">Configurações</a>
+                </router-link>
             </li>
         </ul>
     </nav>

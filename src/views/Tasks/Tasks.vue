@@ -12,10 +12,7 @@
             class="side-bar-main"
         />
         <div class="tasks-container">
-            <p class="tasks-container-title">Minhas Tarefas</p>
-            <p class="tasks-container-subtitle">
-                Olá <span class="name">{{ name }}</span>, você tem <span class="tasks"> {{ totalTasks }} </span><span class="taskLabel">{{ taskLabel }}</span> <span>{{ pendenceLabel }}</span>
-            </p>
+            
             <SearchBar 
                 class="search-bar-home"
                 @search="filterTasksBySearch"
@@ -53,7 +50,7 @@ const sortTasks = (tasks) => {
 };
 
 export default {
-    name: "HomePage",
+    name: "TasksPage",
     components: {
         SidebarMain,
         CategorieBar,
@@ -143,5 +140,5 @@ export default {
 </script>
 
 <style lang="stylus">
-    @import './Home.styl';
+    @import './Tasks.styl';
 </style>

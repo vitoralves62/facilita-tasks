@@ -1,5 +1,5 @@
 <template>
-    <button class="login-button">
+    <button type="submit" class="login-button">
         Entrar
     </button>
 </template>

@@ -4,6 +4,8 @@
             type="text"
             class="search-bar-main"
             placeholder="Buscar Tarefas"
+            v-model="searchQuery"
+            @input="onSearch"
         />
         <img
             src="@/assets/imgs/search-regular1.svg"
@@ -14,7 +16,17 @@
 
 <script>
     export default {
-        name: "SearchBar"
+        name: "SearchBar",
+        data() {
+            return {
+                searchQuery: ''
+            }
+        },
+        methods: {
+            onSearch() {
+                this.$emit('search', this.searchQuery);
+            }
+        }
     }
 </script>
 

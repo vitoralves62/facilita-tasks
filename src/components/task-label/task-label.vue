@@ -1,7 +1,7 @@
 <template>
     <div>
         <label :class="['label-container', { 'checked': isChecked }]">
-            <CustomCheckbox class="checkbox" v-model="isChecked"/>
+            <CustomCheckbox class="checkbox" v-model="isChecked" @change="toggleCompletion"/>
             <div class="task-text-container">
                 <label class="task-label-title">
                     {{ task.title }}
@@ -21,8 +21,20 @@
                     v-if="menuVisible"
                     :taskId="task.id"
                     :showKebabMenu="menuVisible"
-                    @open-task-edit="editTask"
-                    @open-task-delete="deleteTask"
+                    @open-task-edit="openEditModal"
+                    @open-task-delete="openDeleteModal"
+                />
+                <EditTaskModal
+                    v-if="isEditModalVisible"
+                    :task="taskToEdit"
+                    :isVisible="isEditModalVisible"
+                    @close="isEditModalVisible = false"
+                />
+                <DeleteTaskModal
+                    v-if="isDeleteModalVisible"
+                    :task="taskToDelete"
+                    :isVisible="isDeleteModalVisible"
+                    @close="isDeleteModalVisible = false"
                 />
             </div>
         </label>
@@ -32,13 +44,18 @@
 <script>
     import CustomCheckbox from '@/components/inputs/check-box/check-box.vue';
     import KebabMenu from '@/components/kebab-menu/kebab-menu.vue';
-    import { ref, onMounted, onBeforeUnmount } from 'vue';
+    import EditTaskModal from '../modals/edit-task-modal/edit-task-modal.vue';
+    import DeleteTaskModal from '../modals/delete-task-modal/delete-task-modal.vue';
+    import { ref, onMounted, onBeforeUnmount, watch } from 'vue';
+    import { useTaskStore } from '@/stores/taskStore';
 
     export default {
         name: 'TaskLabel',
         components: {
             CustomCheckbox,
-            KebabMenu
+            KebabMenu,
+            EditTaskModal,
+            DeleteTaskModal
         },
         props: {
             task: {
@@ -46,10 +63,15 @@
                 required: true
             }
         },
-        setup() {
-            const isChecked = ref(false);
-            const menuVisible = ref(false);
+        setup(props) {
+            const taskStore = useTaskStore();
+            const isChecked = ref(props.task.completed);
+            const menuVisible = ref(null);
+            const taskToEdit = ref(null);
+            const isEditModalVisible = ref(false);
             const taskLabelRef = ref(null);
+            const taskToDelete = ref(null)
+            const isDeleteModalVisible = ref(false)
 
             const toggleMenu = () => {
                 menuVisible.value = !menuVisible.value;
@@ -61,6 +83,25 @@
                 }
             };
 
+            const openEditModal = () => {
+                taskToEdit.value = props.task;
+                isEditModalVisible.value = true;
+            };
+
+            const closeEditModal = () => {
+                isEditModalVisible.value = false;
+            };
+
+            const openDeleteModal = () => {
+                taskToDelete.value = props.task;
+                isDeleteModalVisible.value = true;
+            };
+
+            const toggleCompletion = () => {
+                taskStore.toggleTaskCompletion(props.task.id);
+                console.log('conlcuí a task')
+            };
+
             onMounted(() => {
                 document.addEventListener('click', handleClickOutside);
             });
@@ -69,11 +110,23 @@
                 document.removeEventListener('click', handleClickOutside);
             });
 
+            watch(() => props.task.completed, (newVal) => {
+                isChecked.value = newVal;
+            });
+
             return {
                 isChecked,
                 menuVisible,
+                isEditModalVisible,
+                taskToEdit,
                 toggleMenu,
-                taskLabelRef
+                openEditModal,
+                closeEditModal,
+                taskLabelRef,
+                openDeleteModal,
+                taskToDelete,
+                isDeleteModalVisible,
+                toggleCompletion
             };
         },
         computed: {
@@ -88,18 +141,13 @@
                         return 'normal';
                 }
             }
-        },
-        methods: {
-            // editTask() {
-            //     // Lógica para editar a tarefa
-            // },
-            // deleteTask(taskId) {
-            //     // Lógica para deletar a tarefa
-            // }
         }
     }
 </script>
 
 <styles lang="stylus">
     @import './task-label.styl'
+    .modal-open .task-options {
+        display: none;
+    }
 </styles>

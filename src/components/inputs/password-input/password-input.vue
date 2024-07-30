@@ -1,16 +1,29 @@
 <template>
     <input
         type="password"
+        :value="modelValue"
+        @input="updateValue"
         class="password-input"
     />
 </template>
 
 <script>
 export default {
-    name: 'PasswordInput'
+    name: 'PasswordInput',
+    props: {
+        modelValue: {
+            type: String,
+            required: true
+        }
+    },
+    methods: {
+        updateValue(event) {
+            this.$emit('input', event.target.value);
+        }
+    }
 }
 </script>
 
 <style lang="stylus">
-    @import './password-input.styl';
+@import './password-input.styl';
 </style>

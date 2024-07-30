@@ -1,7 +1,7 @@
 <template>
     <div v-show="show" class="kebab-menu-container">
         <div class="kebab-menu-main">
-            <button class="edit-button" @click="openTaskEdit" :class="{ 'task-label-menu-opened': showEditTask }">
+            <button class="edit-button" @click="openTaskEdit()" :class="{ 'task-label-menu-opened': showEditTask }">
                 <span class="dot green-dot"></span>Editar
             </button>
             <button class="delete-button" @click="openTaskDelete(taskId)" :class="{ 'task-label-menu-opened': showRemoveModal }">
@@ -18,7 +18,7 @@
         name: 'KebabMenu',
         props: {
             taskId: {
-                type: String,
+                type: Number,
                 required: true
             },
             showEditTask: {
@@ -34,7 +34,7 @@
                 default: false
             }
         },
-        setup(props) {
+        setup(props, {emit}) {
             const show = ref(props.showKebabMenu);
 
             watch(() => props.showKebabMenu, (newValue) => {
@@ -42,15 +42,16 @@
             });
 
             const openTaskEdit = () => {
-                this.$emit('open-task-edit');
+                emit('open-task-edit', props.taskId);
             };
 
             const openTaskDelete = (taskId) => {
-                this.$emit('open-task-delete', taskId);
+                emit('open-task-delete', taskId);
+                console.log(taskId)
             };
 
             const clickIcon = () => {
-                this.$emit('click-icon');
+                emit('click-icon');
             };
 
             return { show, openTaskEdit, openTaskDelete, clickIcon };
