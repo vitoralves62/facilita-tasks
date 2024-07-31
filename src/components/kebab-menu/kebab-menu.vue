@@ -8,7 +8,6 @@
                 <span class="dot gray-dot"></span>Excluir
             </button>
         </div>
-        <i class="fa-solid fa-ellipsis-vertical" @click="clickIcon" :class="{ 'task-label-menu-opened-icon': show }"></i>
     </div>
 </template>
 

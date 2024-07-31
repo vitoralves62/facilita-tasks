@@ -72,7 +72,7 @@ export default {
         });
 
         const tasks = computed(() => taskStore.tasks);
-        const totalTasks = computed(() => taskStore.totalTasks);
+        const totalTasks = computed(() =>  taskStore.pendenceTasks);
         const urgentTasks = computed(() => taskStore.urgentTasks);
         const importantTasks = computed(() => taskStore.importantTasks);
 
@@ -81,9 +81,9 @@ export default {
 
             if (selectedCategory.value !== 'todas') {
                 filtered = filtered.filter(task => {
-                    if (selectedCategory.value === 'urgentes') return task.categorie === 'Urgente';
-                    if (selectedCategory.value === 'importantes') return task.categorie === 'Importante';
-                    if (selectedCategory.value === 'outras') return task.categorie !== 'Urgente' && task.categorie !== 'Importante';
+                    if (selectedCategory.value === 'urgentes') return task.categorie === 'Urgente' && !task.completed;
+                    if (selectedCategory.value === 'importantes') return task.categorie === 'Importante' && !task.completed;
+                    if (selectedCategory.value === 'outras') return task.categorie !== 'Urgente' && task.categorie !== 'Importante' && !task.completed;
                     if (selectedCategory.value === 'finalizadas') return task.completed;
                 });
             }

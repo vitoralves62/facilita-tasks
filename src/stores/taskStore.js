@@ -35,6 +35,7 @@ export const useTaskStore = defineStore('taskStore', {
             this.saveTasks();
         },
         toggleTaskCompletion(taskId) {
+            console.log('entrei na toggleTask do taskStore')
             const task = this.tasks.find(task => task.id === taskId);
             if (task) {
                 task.completed = !task.completed;
@@ -44,9 +45,10 @@ export const useTaskStore = defineStore('taskStore', {
     },
     getters: {
         totalTasks: (state) => state.tasks.length,
-        urgentTasks: (state) => state.tasks.filter(task => task.categorie.toLowerCase() === 'urgente').length,
-        importantTasks: (state) => state.tasks.filter(task => task.categorie.toLowerCase() === 'importante').length,
+        urgentTasks: (state) => state.tasks.filter(task => (task.categorie.toLowerCase() === 'urgente') && !task.completed).length,
+        importantTasks: (state) => state.tasks.filter(task => (task.categorie.toLowerCase() === 'importante') && !task.completed).length,
         normalTasks: (state) => state.tasks.filter(task => !['urgente', 'importante'].includes(task.categorie.toLowerCase()) && !task.completed).length,
         completedTasks: (state) => state.tasks.filter(task => task.completed).length,
+        pendenceTasks: (state) => state.tasks.filter(task => !task.completed).length,
     }
 });

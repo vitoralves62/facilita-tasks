@@ -1,7 +1,19 @@
 <template>
     <div>
+        <EditTaskModal
+            v-if="isEditModalVisible"
+            :task="taskToEdit"
+            :isVisible="isEditModalVisible"
+            @close="isEditModalVisible = false"
+        />
+        <DeleteTaskModal
+            v-if="isDeleteModalVisible"
+            :task="taskToDelete"
+            :isVisible="isDeleteModalVisible"
+            @close="isDeleteModalVisible = false"
+        />
         <label :class="['label-container', { 'checked': isChecked }]">
-            <CustomCheckbox class="checkbox" v-model="isChecked" @change="toggleCompletion"/>
+            <CustomCheckbox class="checkbox" v-model="isChecked" @change="handleCheckboxChange"/>
             <div class="task-text-container">
                 <label class="task-label-title">
                     {{ task.title }}
@@ -24,18 +36,8 @@
                     @open-task-edit="openEditModal"
                     @open-task-delete="openDeleteModal"
                 />
-                <EditTaskModal
-                    v-if="isEditModalVisible"
-                    :task="taskToEdit"
-                    :isVisible="isEditModalVisible"
-                    @close="isEditModalVisible = false"
-                />
-                <DeleteTaskModal
-                    v-if="isDeleteModalVisible"
-                    :task="taskToDelete"
-                    :isVisible="isDeleteModalVisible"
-                    @close="isDeleteModalVisible = false"
-                />
+                
+                
             </div>
         </label>
     </div>
@@ -97,9 +99,14 @@
                 isDeleteModalVisible.value = true;
             };
 
+            const handleCheckboxChange = (newValue) => {
+                console.log('handleCheckboxChange called with value:', newValue);
+                toggleCompletion();
+            };
+
             const toggleCompletion = () => {
                 taskStore.toggleTaskCompletion(props.task.id);
-                console.log('conlcuí a task')
+                console.log('Completed task:', props.task.id, 'New state:', isChecked.value);
             };
 
             onMounted(() => {
@@ -126,7 +133,8 @@
                 openDeleteModal,
                 taskToDelete,
                 isDeleteModalVisible,
-                toggleCompletion
+                toggleCompletion,
+                handleCheckboxChange
             };
         },
         computed: {
