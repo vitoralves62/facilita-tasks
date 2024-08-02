@@ -1,5 +1,16 @@
 # FACILITATASKS
 
+### Deployed Aplication
+```
+https://vercel.com/vitoralves62s-projects/facilita-tasks
+```
+
+## credencials
+```
+login: vitor@appfacilita.com
+senha: senha123
+```
+
 ## Project setup
 ```
 npm install
