@@ -21,7 +21,7 @@
                 <TaskLabel :task="task"/>
             </div>
         </div>
-        <button @click="openModal" class="add-task-button">+</button>
+        <button @click="openModal" class="add-task-button-tasks-page">+</button>
         <CreateTaskModal
             :isVisible="isModalVisible"
             @close="closeModal"

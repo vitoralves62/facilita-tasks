@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="desc-container">
         <legend class="desc-legend">Descrição:</legend>
         <textarea 
             class="task-desc-main"

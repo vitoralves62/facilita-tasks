@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div  @mouseleave="onMouseLeave">
         <EditTaskModal
             v-if="isEditModalVisible"
             :task="taskToEdit"
@@ -48,7 +48,7 @@
     import KebabMenu from '@/components/kebab-menu/kebab-menu.vue';
     import EditTaskModal from '../modals/edit-task-modal/edit-task-modal.vue';
     import DeleteTaskModal from '../modals/delete-task-modal/delete-task-modal.vue';
-    import { ref, onMounted, onBeforeUnmount, watch } from 'vue';
+    import { ref,  watch } from 'vue';
     import { useTaskStore } from '@/stores/taskStore';
 
     export default {
@@ -79,10 +79,8 @@
                 menuVisible.value = !menuVisible.value;
             };
 
-            const handleClickOutside = (event) => {
-                if (taskLabelRef.value && !taskLabelRef.value.contains(event.target)) {
-                    menuVisible.value = false;
-                }
+            const onMouseLeave = () => {
+                menuVisible.value = false;
             };
 
             const openEditModal = () => {
@@ -109,14 +107,6 @@
                 console.log('Completed task:', props.task.id, 'New state:', isChecked.value);
             };
 
-            onMounted(() => {
-                document.addEventListener('click', handleClickOutside);
-            });
-
-            onBeforeUnmount(() => {
-                document.removeEventListener('click', handleClickOutside);
-            });
-
             watch(() => props.task.completed, (newVal) => {
                 isChecked.value = newVal;
             });
@@ -134,7 +124,8 @@
                 taskToDelete,
                 isDeleteModalVisible,
                 toggleCompletion,
-                handleCheckboxChange
+                handleCheckboxChange,
+                onMouseLeave
             };
         },
         computed: {
