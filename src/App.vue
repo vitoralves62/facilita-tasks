@@ -8,8 +8,13 @@
 </template>
 
 <script>
+import { useUserStore } from '@/stores/userStore';
 export default {
-  name: 'App'
+  name: 'App',
+  setup() {
+    const userStore = useUserStore();
+    userStore.loadUser(); // Carrega o usuário ao montar o aplicativo
+  }
 };
 </script>
 

@@ -35,7 +35,7 @@ import EmailInput from '@/components/inputs/email-input/email-input.vue';
 import LogoType from "@/components/Logotype/LogoType.vue";
 import PasswordInput from "@/components/inputs/password-input/password-input.vue";
 import LoginButton from "@/components/login-button/login-button.vue"
-// import { useUserStore } from '@/stores/userStore';
+import { useUserStore } from '@/stores/userStore';
 
 export default {
     name: "LoginPage",
@@ -51,6 +51,10 @@ export default {
             password: ''
         };
     },
+    setup() {
+        const userStore = useUserStore();
+        return { userStore };
+    },
     methods: {
         handleLogin() {
             if (this.email === 'vitor@appfacilita.com' && this.password === 'senha123') {
@@ -60,8 +64,7 @@ export default {
                     role: 'Dev Front-end',
                     tasks: []
                 };
-                // Simular login bem-sucedido sem usar localStorage
-                this.$emit('login', userData);
+                this.userStore.login(userData);
                 this.$router.push({ name: 'HomePage' });
             } else {
                 alert('Credenciais inválidas');

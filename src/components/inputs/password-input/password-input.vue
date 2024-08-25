@@ -1,7 +1,7 @@
 <template>
     <input
         type="password"
-        :value="modelValue"
+        :value="value"
         @input="updateValue"
         class="password-input"
     />
@@ -11,7 +11,7 @@
 export default {
     name: 'PasswordInput',
     props: {
-        modelValue: {
+        value: {
             type: String,
             required: true
         }

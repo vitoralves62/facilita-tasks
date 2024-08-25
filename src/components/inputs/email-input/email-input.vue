@@ -1,7 +1,7 @@
 <template>
     <input
         type="email"
-        :value="modelValue"
+        :value="value"
         @input="updateValue"
         class="email-input"
     />
@@ -11,7 +11,7 @@
 export default {
     name: 'EmailInput',
     props: {
-        modelValue: {
+        value: {
             type: String,
             required: true
         }
